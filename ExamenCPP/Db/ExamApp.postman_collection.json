@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "d1565bdb-a1e0-4e3d-ba5f-ed066c76c78a",
+		"name": "ExamApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Exam-Obtener Empleados",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Exam-Obtener Empleados Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlCppel}}/api/empleado/1",
+					"host": [
+						"{{urlCppel}}"
+					],
+					"path": [
+						"api",
+						"empleado",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exam-Grabar Empleado",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener empleado por Numero de Empleado",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
