@@ -50,7 +50,7 @@ namespace ExamenCPP.Controllers
 
 
         [HttpPost]
-        public ActionResult GrabarEmpleado([FromBody] RqEmpleado empleado)
+        public ActionResult GrabarEmpleado([FromBody] Empleado empleado)
         {
             var result = _bsEmpleado.InsertEmpleado(empleado);
 
@@ -60,7 +60,7 @@ namespace ExamenCPP.Controllers
         [HttpPut]
         public ActionResult Actualizar([FromBody] Empleado empleado)
         {
-            var result = _bsEmpleado.InsertEmpleadoAsync(empleado);
+            var result = _bsEmpleado.InsertEmpleado(empleado);
 
             return Ok(result);
         }

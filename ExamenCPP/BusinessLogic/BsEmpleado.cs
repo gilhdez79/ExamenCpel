@@ -17,13 +17,13 @@ namespace ExamenCPP.BusinessLogic
         {
             _dbCntext = dbcontext;
         }
-        public async Task<OperationResult<Empleado>> InsertEmpleadoAsync(Empleado itemEmpleado)
+        public async Task<OperationResult<Empleado>> InsertEmpleado(Empleado itemEmpleado)
         {
             try
             {
 
 
-
+                _dbCntext.Empleado.Add(itemEmpleado);
                // var result =  _dbCntext.SPInsertEmpleado.;
 
 
