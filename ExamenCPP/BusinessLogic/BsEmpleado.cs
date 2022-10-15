@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExamenCPP.BusinessLogic
 {
@@ -22,7 +21,7 @@ namespace ExamenCPP.BusinessLogic
         {
             _dbCntext = dbcontext;
         }
-        public async Task<OperationResult<Empleado>> InsertEmpleado(RqEmpleado itemEmpleado)
+        public OperationResult<Empleado> InsertEmpleado(RqEmpleado itemEmpleado)
         {
             try
             {
@@ -51,11 +50,12 @@ namespace ExamenCPP.BusinessLogic
         {
             try
             {
-                 var itemEmpleado =    _dbCntext.Empleado.Where(e=>e.NumeroEmpleado == numeroEmpleado).FirstOrDefault();
+                string mensaje = "Operacion Exitosa";
+                var itemEmpleado =    _dbCntext.Empleado.Where(e=>e.NumeroEmpleado == numeroEmpleado).FirstOrDefault();
 
-
+                mensaje = itemEmpleado!=null?mensaje: "No se encontraron datos";
                 operationResult.Success = true;
-                operationResult.InfoMensaje = new SystemMessage { Message = "OperacionExitosa", TipoMensaje = TipoMensaje.Default };
+                operationResult.InfoMensaje = new SystemMessage { Message = mensaje, TipoMensaje = TipoMensaje.Default };
                 operationResult.SetSuccesObject(itemEmpleado);
 
             }
