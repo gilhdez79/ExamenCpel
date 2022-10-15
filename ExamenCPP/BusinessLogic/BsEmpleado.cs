@@ -1,5 +1,7 @@
 ﻿using ExamenCPP.Models;
 using ExamenCPP.Models.Request;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ExamenCPP.BusinessLogic
 {
+    /// <summary>
+    /// Clase de Negocio para tratamiento de la entidad Empleado
+    /// </summary>
     public class BsEmpleado
     {
         private readonly BKdbExamenContext _dbCntext;
@@ -17,31 +22,31 @@ namespace ExamenCPP.BusinessLogic
         {
             _dbCntext = dbcontext;
         }
-        public async Task<OperationResult<Empleado>> InsertEmpleado(Empleado itemEmpleado)
+        public async Task<OperationResult<Empleado>> InsertEmpleado(RqEmpleado itemEmpleado)
         {
             try
             {
 
+                var prmNombre = new SqlParameter("@Nombre", itemEmpleado.Nombre);
+                var prmNumEmpleado = new SqlParameter("@NumeroEmpleado", itemEmpleado.NumeroEmpleado);
+                var prmRolId = new SqlParameter("@RolId", itemEmpleado.IdRol);
 
-                _dbCntext.Empleado.Add(itemEmpleado);
-               // var result =  _dbCntext.SPInsertEmpleado.;
-
+                var userType = _dbCntext.Database.ExecuteSqlRaw($"exec dbo.[sp_GrabarEmpleado] @Nombre,@NumeroEmpleado,@RolId", prmNombre,prmNumEmpleado,prmRolId);
 
                 operationResult.Success = true;
                 operationResult.InfoMensaje = new SystemMessage { Message = "Se Guardaron los datos Correctamente", TipoMensaje = TipoMensaje.Default };
-                operationResult.SetSuccesObject(itemEmpleado);
+               //operationResult.SetSuccesObject(userType);
                 
             }
             catch (Exception ex)
             {
                 operationResult.Success = false;
-                operationResult.InfoMensaje = new SystemMessage { Message = "Error al Obtener los datos", TipoMensaje = TipoMensaje.Error };
+                operationResult.InfoMensaje = new SystemMessage { Message = "Error al Guardar la Informacion", TipoMensaje = TipoMensaje.Error };
 
             }
 
             return operationResult;
         }
-
         public OperationResult<Empleado> ObtenerEmpleado(string numeroEmpleado)
         {
             try
@@ -105,8 +110,6 @@ namespace ExamenCPP.BusinessLogic
 
             return operationResult;
         }
-
-
         public OperationResult<IEnumerable<Empleado>> ObtenertListaEmpleados()
         {
             OperationResult<IEnumerable<Empleado>> operationResultList = new OperationResult<IEnumerable<Empleado>>();

@@ -15,14 +15,11 @@ namespace ExamenCPP.Controllers
         private readonly BKdbExamenContext _dbCntext;
 
          BsEmpleado _bsEmpleado;
-
    
         public EmpleadoController(BKdbExamenContext dbcontext)
         {
             _dbCntext = dbcontext;
             _bsEmpleado = new BsEmpleado(dbcontext);
-
-
         }
 
         [Route("")]
@@ -31,7 +28,6 @@ namespace ExamenCPP.Controllers
         {
             return Ok(_bsEmpleado.ObtenertListaEmpleados());
         }
-
 
         [HttpGet()]
         [Route("ObtenerEmpleado/{numeroEmpleado}")]
@@ -48,9 +44,8 @@ namespace ExamenCPP.Controllers
             return Ok(_bsEmpleado.ObtenerEmpleadoXId(id));
         }
 
-
         [HttpPost]
-        public ActionResult GrabarEmpleado([FromBody] Empleado empleado)
+        public ActionResult GrabarEmpleado([FromBody] RqEmpleado empleado)
         {
             var result = _bsEmpleado.InsertEmpleado(empleado);
 
@@ -60,11 +55,10 @@ namespace ExamenCPP.Controllers
         [HttpPut]
         public ActionResult Actualizar([FromBody] Empleado empleado)
         {
-            var result = _bsEmpleado.InsertEmpleado(empleado);
+            var result = _bsEmpleado.UpdateEmpleado(empleado);
 
             return Ok(result);
         }
-
     }
 }
  
