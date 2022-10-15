@@ -89,12 +89,12 @@ namespace ExamenCPP.BusinessLogic
 
             return operationResult;
         }
-        public OperationResult<Empleado> UpdateEmpleado(Empleado itemEmpleado)
+        public  OperationResult<Empleado> UpdateEmpleado(Empleado itemEmpleado)
         {
             try
             {
                 _dbCntext.Empleado.Update(itemEmpleado);
-
+                 _dbCntext.SaveChanges();
 
                 operationResult.Success = true;
                 operationResult.InfoMensaje = new SystemMessage { Message = "Se Guardaron los datos Correctamente", TipoMensaje = TipoMensaje.Default };
