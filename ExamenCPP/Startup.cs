@@ -29,6 +29,7 @@ namespace ExamenCPP
         {
             var connectionString = Configuration.GetConnectionString("AppDb");
             services.AddDbContext<BKdbExamenContext>(options => options.UseSqlServer(connectionString)); ;
+
             services.AddControllers();
         }
 
