@@ -26,17 +26,7 @@ namespace ExamenCPP.BusinessLogic
 
             try
             {
-                /*
-                var prmNumeroMes = new SqlParameter("@NumeroMes", numeromes);
-
-                var userType = _dbCntext.Database.ExecuteSqlCommand($"exec dbo.[sp_GenerarNomina] @NumeroMes", prmNumeroMes);
-
-                operationResult.Success = true;
-                operationResult.InfoMensaje = new SystemMessage { Message = "Se  Obtuvieron Correctamente", TipoMensaje = TipoMensaje.Default };
-              //  operationResult.SetSuccesObject(userType as RpNomina);
-              */
-
-                using (DbConnection conn = _dbCntext.Database.GetDbConnection())
+               using (DbConnection conn = _dbCntext.Database.GetDbConnection())
                 {
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();

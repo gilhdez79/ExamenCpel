@@ -30,7 +30,18 @@ namespace ExamenCPP
             var connectionString = Configuration.GetConnectionString("AppDb");
             services.AddDbContext<BKdbExamenContext>(options => options.UseSqlServer(connectionString)); ;
             services.AddControllers();
-        }
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+            });
+ 
+         }   
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,6 +51,7 @@ namespace ExamenCPP
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowOrigin");
             app.UseHttpsRedirection();
 
             app.UseRouting();
