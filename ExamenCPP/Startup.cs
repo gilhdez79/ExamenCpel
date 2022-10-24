@@ -36,7 +36,7 @@ namespace ExamenCPP
                 options.AddPolicy(name: "AllowOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+                        builder.WithOrigins("http://localhost:8003", "http://localhost:4200")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });

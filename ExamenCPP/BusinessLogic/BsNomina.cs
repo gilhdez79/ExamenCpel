@@ -20,7 +20,7 @@ namespace ExamenCPP.BusinessLogic
             _dbCntext = dbcontext;
         }
 
-        public  OperationResult<IEnumerable<RpNomina>> ObtenerNomniaAsync(int numeromes)
+        public  OperationResult<IEnumerable<RpNomina>> ObtenerNomnia(int numeromes)
         {
             OperationResult<IEnumerable<RpNomina>> operationResult = new OperationResult<IEnumerable<RpNomina>>();
 

@@ -19,11 +19,11 @@ namespace ExamenCPP.Controllers
             _bsNomina = new BsNomina(dbcontext);
         }
 
-        [Route("{numeroMes}")]
+        [Route("obtenernomina/{numeroMes}")]
         [HttpGet]
         public IActionResult ObtenerNomina(int numeroMes)
         {
-            return Ok(_bsNomina.ObtenerNomniaAsync(numeroMes));
+            return Ok(_bsNomina.ObtenerNomnia(numeroMes));
         }
     }
 }
