@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExamenCPP.Models.Request;
+using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace ExamenCPP.Controllers
 {
@@ -13,11 +15,12 @@ namespace ExamenCPP.Controllers
     public class EmpleadoController : ControllerBase
     {
         private readonly BKdbExamenContext _dbCntext;
-
-         BsEmpleado _bsEmpleado;
+        ILogger<EmpleadoController> logger = null;
+        BsEmpleado _bsEmpleado;
    
-        public EmpleadoController(BKdbExamenContext dbcontext)
+        public EmpleadoController(BKdbExamenContext dbcontext, ILogger<EmpleadoController> _logger)
         {
+            logger = _logger;
             _dbCntext = dbcontext;
             _bsEmpleado = new BsEmpleado(dbcontext);
         }
@@ -33,6 +36,7 @@ namespace ExamenCPP.Controllers
         [Route("ObtenerEmpleado/{numeroEmpleado}")]
         public ActionResult ObtenerEmpleado(string numeroEmpleado)
         {
+            logger.LogError($"Returning Informacion ");
             return Ok(_bsEmpleado.ObtenerEmpleado(numeroEmpleado));
         }
 
@@ -41,7 +45,19 @@ namespace ExamenCPP.Controllers
 
         public ActionResult ObtenerEmpleadoXId(int id)
         {
-            return Ok(_bsEmpleado.ObtenerEmpleadoXId(id));
+
+
+            try
+            {
+                logger.LogError($"Returning informacion");
+                return Ok(_bsEmpleado.ObtenerEmpleadoXId(id));
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Returning {ex.Message.ToString()}  ");
+                return BadRequest();
+              
+            }
         }
 
         [HttpPost]

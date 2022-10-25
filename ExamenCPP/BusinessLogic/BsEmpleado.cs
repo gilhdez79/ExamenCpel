@@ -2,6 +2,7 @@
 using ExamenCPP.Models.Request;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ExamenCPP.BusinessLogic
         private readonly BKdbExamenContext _dbCntext;
         OperationResult<Empleado> operationResult = new OperationResult<Empleado>();
 
+        private readonly ILogger<BsEmpleado> _logger;
 
         public BsEmpleado(BKdbExamenContext dbcontext)
         {
